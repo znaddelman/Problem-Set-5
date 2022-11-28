@@ -11,6 +11,8 @@ public class HorseRacing extends Deck {
         System.out.println("    Welcome to Horse Racing     ");
         System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=");
         Scanner scnr = new Scanner(System.in);
+
+
         String heart, diamond, spade, club;
         int heartLength = 0, diamondLength = 0, spadeLength = 0, clubLength = 0;
         int heartOdds = 0, diamondOdds = 0, spadeOdds = 0, clubOdds = 0;
@@ -26,6 +28,8 @@ public class HorseRacing extends Deck {
         System.out.println("You have $" + playerMoney + " left.");
         System.out.println(" ");
         while(userPlay) {
+            boolean playAnswer = true;
+            String input;
             int wagerAmt = 0, wager = 0;
             while (validWager) { //keeps looping until it gets a valid wager amount or reads that the user is out of money.
                 System.out.println();
@@ -86,7 +90,7 @@ public class HorseRacing extends Deck {
             System.out.println("Which suit would you like to bet on?");
             System.out.println("(H for heart, C for club, D for diamonds, S for spades)");
 
-            String input = scnr.nextLine();
+            input = scnr.nextLine();
 
             System.out.print("DIAMOND: ");
             howFar(diamondLength);
@@ -97,11 +101,33 @@ public class HorseRacing extends Deck {
             System.out.print("HEART:   ");
             howFar(heartLength);
             if(race(deck, clubLength, diamondLength, heartLength, spadeLength).equals(userWins(input))) {
-                return playerMoney += wager * getMultiplier(heartOdds);
+                playerMoney += wager * getMultiplier(heartOdds);
             } else {
-                return playerMoney =- wager;
+                playerMoney =- wager;
             }
 
+            while (playAnswer) {
+                System.out.print("Play again? [y/n]: "); // asks for input to play again or not
+                String playAgain = scnr.next();
+                if (playAgain.equals("y") || playAgain.equals("Y")) { //keeps the mainloop going by re-establishing that userPlay is true.
+                    userPlay = true;
+                    playAnswer = false;
+                    break;
+                } else if (playAgain.equals("N") || playAgain.equals("n")){ //if they don't want to play spit out the game statistics and stop the code.
+                    userPlay = false;
+                    System.out.println("GAME STATISTICS----------");
+
+                    System.out.println("Player ended with $" + playerMoney + ".");
+                    System.out.println("-------------------------");
+                    break;
+                } else if (playerMoney <= 0){ //checks to see if you're out of money, and if you are then ends the game.
+                    System.out.println("You ran out of money. Go to the menu to deposit more!");
+                    System.out.println("GAME STATISTICS----------");
+                    System.out.println("Player  ended with $" + playerMoney + ".");
+                    System.out.println("-------------------------");
+                    break;
+                }
+            }
 
 
         }
