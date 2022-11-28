@@ -59,6 +59,9 @@ public class MainMenu {
         if (userChoice == 2){
             playerMoney = BlackJack.runBlackjack(playerMoney);
         }
+        if (userChoice == 3){
+            playerMoney = Roulette.runRoulette(playerMoney);
+        }
         if(userChoice == 4) {
             playerMoney = HorseRacing.raceHorses(playerMoney);
         }
