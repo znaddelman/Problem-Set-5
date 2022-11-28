@@ -12,26 +12,28 @@ import java.util.Scanner;
 public class HorseRacing extends Deck { //horse racing extends deck of cards
     public static int raceHorses(int playerMoney) {
         //printing introduction and establishing variables & scanner
-        System.out.println("");
-        System.out.println("");
-        System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=");
-        System.out.println("    Welcome to Horse Racing     ");
-        System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=");
+        header(); //header function
+
+        //scanner, int, String, and boolean vars
         Scanner scnr = new Scanner(System.in);
-
-
-
         int heartMult, diamondMult, spadeMult, clubMult;
         String input;
-
         boolean validWager, userPlay = true;
 
+        //create new deck
         Deck deck = new Deck();
         deck.setDeckNoAces(); //sets deck without aces (aces are what are being moved along)
         deck.shuffle();
 
         System.out.println("You have $" + playerMoney + " left.");
         System.out.println(" ");
+
+        System.out.println("Enter 'I' to read instructions, or enter anything else to ignore them");
+        input = scnr.next();
+
+        if(input.equals("I")||input.equals("i")) {
+            instructions();
+        }
         while(userPlay) {
 
             boolean playAnswer = true;
@@ -243,5 +245,34 @@ public class HorseRacing extends Deck { //horse racing extends deck of cards
         else if(input.equals("C")) {return "Clubs";}
         else if(input.equals("H")) {return "Hearts"; }
         return "";
+    }
+
+    public static void instructions() {
+        System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=");
+        System.out.println("    How To Play Horse Racing    ");
+        System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=");
+        System.out.println("The dealer extracts the four aces from the deck and places them in a column. " +
+                        "\nThe cards are then shuffled and cut, and the dealer deals seven cards face up in a " +
+                        "\nhorizontal row a long the top of the layout to mark out the course as shown in the diagram.");
+        System.out.println("\nThe dealer sets the odds on each horse based on how many cards are dealt:");
+        System.out.println("0 cards: 1-in-1");
+        System.out.println("1 card: 2-in-1");
+        System.out.println("2 cards: 3-in-1");
+        System.out.println("3 cards: 5-in-1");
+        System.out.println("4 cards: 10-in-1");
+        System.out.println("(5 or more cards is rare, but resets the deck because it would be impossible for that suit to win)");
+        System.out.println("The dealer deals cards from the remainder of the deck one at a time face up onto a pile. Each time a " +
+                "\ncard is dealt, the horse of that suit moves one space to the right along the course. The first horse " +
+                "\nto cross the finish line (which will happen when eight cards of that suit have been dealt) wins the race. The " +
+                "\ndealer pays out the bets on the winning horse and collects the bets on the others. It is then the next player's " +
+                "\nturn to deal.");
+    }
+
+    public static void header() {
+        System.out.println("");
+        System.out.println("");
+        System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=");
+        System.out.println("    Welcome to Horse Racing     ");
+        System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=");
     }
 }
