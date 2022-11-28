@@ -5,10 +5,11 @@ public class MainMenu {
         Scanner sc = new Scanner(System.in);
         boolean runMainMenu = true;
         while (runMainMenu) {
+
             System.out.println("=-=-=-=-=-=-=-=-=-=-Main Menu-=-=-=-=-=-=-=-=-=-=");
             System.out.println("1 - Bank Account Menu");
             System.out.println("2 - Blackjack");
-            System.out.println("3 - ");
+            System.out.println("3 - Horse Racing");
             System.out.println("4 - ");
             System.out.println("5 - ");
             System.out.println("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
@@ -58,6 +59,12 @@ public class MainMenu {
         if (userChoice == 2){
             playerMoney = BlackJack.runBlackjack(playerMoney);
         }
+        if(userChoice == 3) {
+            playerMoney = HorseRacing.raceHorses(playerMoney);
+        }
         return playerMoney;
     }
+
+
+
 }
