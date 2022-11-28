@@ -9,8 +9,8 @@ public class MainMenu {
             System.out.println("=-=-=-=-=-=-=-=-=-=-Main Menu-=-=-=-=-=-=-=-=-=-=");
             System.out.println("1 - Bank Account Menu");
             System.out.println("2 - Blackjack");
-            System.out.println("3 - Horse Racing");
-            System.out.println("4 - ");
+            System.out.println("3 - Roulette");
+            System.out.println("4 - Horse Racing");
             System.out.println("5 - ");
             System.out.println("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
             System.out.println(" ");
@@ -59,7 +59,7 @@ public class MainMenu {
         if (userChoice == 2){
             playerMoney = BlackJack.runBlackjack(playerMoney);
         }
-        if(userChoice == 3) {
+        if(userChoice == 4) {
             playerMoney = HorseRacing.raceHorses(playerMoney);
         }
         return playerMoney;
