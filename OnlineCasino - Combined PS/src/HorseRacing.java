@@ -18,7 +18,7 @@ public class HorseRacing extends Deck {
         int heartMult, diamondMult, spadeMult, clubMult;
         String input;
 
-        boolean validWager = true, userPlay = true;
+        boolean validWager, userPlay = true;
 
         Deck deck = new Deck();
         deck.setDeck();
@@ -29,6 +29,7 @@ public class HorseRacing extends Deck {
         while(userPlay) {
 
             boolean playAnswer = true;
+            validWager = true;
             int heartLength = 0, diamondLength = 0, spadeLength = 0, clubLength = 0;
             int heartOdds = 0, diamondOdds = 0, spadeOdds = 0, clubOdds = 0;
             int wager = 0;
@@ -38,6 +39,7 @@ public class HorseRacing extends Deck {
                 int wagerAmt = scnr.nextInt(); // asks for wager amount
                 if (wagerAmt <= playerMoney) {
                     wager = wagerAmt;
+                    System.out.println();
                     validWager = false;
                 } else if (playerMoney <= 0){
                     System.out.println("You are out of money. Please deposit more if you wish to keep playing.");
@@ -101,11 +103,26 @@ public class HorseRacing extends Deck {
             howFar(spadeLength);
             System.out.print("HEART:   ");
             howFar(heartLength);
+            System.out.println(playerMoney + "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
             if(race(deck, clubLength, diamondLength, heartLength, spadeLength).equals(userWins(input))) {
-                if(userWins(input).equals("Diamonds")) {playerMoney += wager * diamondMult;}
-                else if(userWins(input).equals("Hearts")) {playerMoney += wager * heartMult;}
-                else if(userWins(input).equals("Spades")) {playerMoney += wager * spadeMult;}
-                else if(userWins(input).equals("Clubs")) {playerMoney += wager * clubMult;}
+                System.out.println(userWins(input) + " !!!!!!!!!!!EIJFDSLJFLSKDFJM");
+                System.out.println("Wager: " + wager);
+                if(userWins(input).equals("Diamonds")) {
+                    playerMoney += wager * diamondMult;
+                    System.out.println("Diamonds win!");
+                }
+                else if(userWins(input).equals("Hearts")) {
+                    playerMoney += wager * heartMult;
+                    System.out.println("Hearts Win!");
+                }
+                else if(userWins(input).equals("Spades")) {
+                    playerMoney += wager * spadeMult;
+                    System.out.println("Spades Win!");
+                }
+                else if(userWins(input).equals("Clubs")) {
+                    playerMoney += wager * clubMult;
+                    System.out.println("Clubs Win!");
+                }
                 else{
                     System.out.println("Did not work!");
                 }
@@ -113,6 +130,7 @@ public class HorseRacing extends Deck {
                 System.out.println("You win!");
                 System.out.println("Your remaining balance is " + playerMoney);
             } else {
+                System.out.println(userWins(input) + " !!!!!!!!!!!EIJFDSLJFLSKDFJM");
                 playerMoney -= wager;
                 System.out.println("You lose!");
                 System.out.println("Your remaining balance is " + playerMoney);
@@ -214,10 +232,10 @@ public class HorseRacing extends Deck {
     }
 
     public static String userWins (String input) {
-        if(input.equals("D")) { return "Diamonds";}
-        if(input.equals("S")) {return "Spades";}
-        if(input.equals("C")) {return "Clubs";}
-        if(input.equals("H")) {return "Hearts"; }
+             if(input.equals("D")) { return "Diamonds";}
+        else if(input.equals("S")) {return "Spades";}
+        else if(input.equals("C")) {return "Clubs";}
+        else if(input.equals("H")) {return "Hearts"; }
         return "";
     }
 }
