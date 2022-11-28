@@ -1,3 +1,4 @@
+import java.sql.SQLOutput;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
@@ -13,13 +14,11 @@ public class HorseRacing extends Deck {
         Scanner scnr = new Scanner(System.in);
 
 
-        String heart, diamond, spade, club;
-        int heartLength = 0, diamondLength = 0, spadeLength = 0, clubLength = 0;
-        int heartOdds = 0, diamondOdds = 0, spadeOdds = 0, clubOdds = 0;
+
         int heartMult, diamondMult, spadeMult, clubMult;
+        String input;
+
         boolean validWager = true, userPlay = true;
-
-
 
         Deck deck = new Deck();
         deck.setDeck();
@@ -28,13 +27,15 @@ public class HorseRacing extends Deck {
         System.out.println("You have $" + playerMoney + " left.");
         System.out.println(" ");
         while(userPlay) {
+
             boolean playAnswer = true;
-            String input;
-            int wagerAmt = 0, wager = 0;
+            int heartLength = 0, diamondLength = 0, spadeLength = 0, clubLength = 0;
+            int heartOdds = 0, diamondOdds = 0, spadeOdds = 0, clubOdds = 0;
+            int wager = 0;
             while (validWager) { //keeps looping until it gets a valid wager amount or reads that the user is out of money.
                 System.out.println();
                 System.out.print("Enter wager amount: ");
-                wagerAmt = scnr.nextInt(); // asks for wager amount
+                int wagerAmt = scnr.nextInt(); // asks for wager amount
                 if (wagerAmt <= playerMoney) {
                     wager = wagerAmt;
                     validWager = false;
@@ -91,6 +92,7 @@ public class HorseRacing extends Deck {
             System.out.println("(H for heart, C for club, D for diamonds, S for spades)");
 
             input = scnr.nextLine();
+            input = scnr.nextLine();
 
             System.out.print("DIAMOND: ");
             howFar(diamondLength);
@@ -101,13 +103,24 @@ public class HorseRacing extends Deck {
             System.out.print("HEART:   ");
             howFar(heartLength);
             if(race(deck, clubLength, diamondLength, heartLength, spadeLength).equals(userWins(input))) {
-                playerMoney += wager * getMultiplier(heartOdds);
+                if(userWins(input).equals("Diamonds")) {playerMoney += wager * diamondMult;}
+                else if(userWins(input).equals("Hearts")) {playerMoney += wager * heartMult;}
+                else if(userWins(input).equals("Spades")) {playerMoney += wager * spadeMult;}
+                else if(userWins(input).equals("Clubs")) {playerMoney += wager * clubMult;}
+                else{
+                    System.out.println("Did not work!");
+                }
+
+                System.out.println("You win!");
+                System.out.println("Your remaining balance is " + playerMoney);
             } else {
-                playerMoney =- wager;
+                playerMoney -= wager;
+                System.out.println("You lose!");
+                System.out.println("Your remaining balance is " + playerMoney);
             }
 
             while (playAnswer) {
-                System.out.print("Play again? [y/n]: "); // asks for input to play again or not
+                System.out.print("Would you like to play again? [y/n]: "); // asks for input to play again or not
                 String playAgain = scnr.next();
                 if (playAgain.equals("y") || playAgain.equals("Y")) { //keeps the mainloop going by re-establishing that userPlay is true.
                     userPlay = true;
