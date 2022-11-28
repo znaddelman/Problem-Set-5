@@ -1,3 +1,13 @@
+/**********************************************************************
+ * @file MainMenu.java
+ * @brief An online casino with multiple games and a banking system. The
+ * games include blackjack, roulette, horse racing, and more. This page
+ * is our main menu code.
+ * @authors Kevin Chuang, Christian Hayden, Alison LaPat, Zach Naddelman
+ * @date: 11/28/2022
+ * @acknowledgement: N/A
+ ***********************************************************************/
+
 import java.util.Scanner;
 public class MainMenu {
     public static void main(String[] args) {

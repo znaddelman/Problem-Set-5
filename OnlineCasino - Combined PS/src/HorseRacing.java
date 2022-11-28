@@ -1,7 +1,13 @@
-import java.sql.SQLOutput;
-import java.util.Random;
+/**********************************************************************
+ * @file HorseRacing.java
+ * @brief Created a horse racing card game in Java. Inputs user's money
+ * and plays until user quits
+ * @author Zach Naddelman
+ * @date: 11/28/2022
+ * @acknowledgement: N/A
+ ***********************************************************************/
 import java.util.Scanner;
-import java.util.concurrent.TimeUnit;
+
 
 public class HorseRacing extends Deck {
     public static int raceHorses(int playerMoney) {
