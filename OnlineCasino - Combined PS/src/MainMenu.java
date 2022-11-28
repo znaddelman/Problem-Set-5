@@ -5,7 +5,7 @@ public class MainMenu {
         Scanner sc = new Scanner(System.in);
         boolean runMainMenu = true;
         while (runMainMenu) {
-            
+
             System.out.println("=-=-=-=-=-=-=-=-=-=-Main Menu-=-=-=-=-=-=-=-=-=-=");
             System.out.println("1 - Bank Account Menu");
             System.out.println("2 - Blackjack");
@@ -64,4 +64,7 @@ public class MainMenu {
         }
         return playerMoney;
     }
+
+
+
 }

@@ -28,7 +28,7 @@ public class Deck {
     }
 
     public void getSpot(int i) {
-        System.out.print(deck[i]);
+        System.out.println(deck[i]);
     }
 
     public boolean isHeart(int i) {
