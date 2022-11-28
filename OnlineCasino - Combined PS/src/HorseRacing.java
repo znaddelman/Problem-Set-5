@@ -91,8 +91,7 @@ public class HorseRacing extends Deck {
             System.out.println("Which suit would you like to bet on?");
             System.out.println("(H for heart, C for club, D for diamonds, S for spades)");
 
-            input = scnr.nextLine();
-            input = scnr.nextLine();
+            input = scnr.next();
 
             System.out.print("DIAMOND: ");
             howFar(diamondLength);
