@@ -9,7 +9,7 @@
 import java.util.Scanner;
 
 
-public class HorseRacing extends Deck {
+public class HorseRacing extends Deck { //horse racing extends deck of cards
     public static int raceHorses(int playerMoney) {
         //printing introduction and establishing variables & scanner
         System.out.println("");
@@ -27,7 +27,7 @@ public class HorseRacing extends Deck {
         boolean validWager, userPlay = true;
 
         Deck deck = new Deck();
-        deck.setDeck();
+        deck.setDeckNoAces(); //sets deck without aces (aces are what are being moved along)
         deck.shuffle();
 
         System.out.println("You have $" + playerMoney + " left.");

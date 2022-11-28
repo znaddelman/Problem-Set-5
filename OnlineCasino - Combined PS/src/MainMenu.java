@@ -4,7 +4,7 @@
  * games include blackjack, roulette, horse racing, and more. This page
  * is our main menu code.
  * @authors Kevin Chuang, Christian Hayden, Alison LaPat, Zach Naddelman
- * @date: 11/28/2022
+ * @date: 11/30/2022
  * @acknowledgement: N/A
  ***********************************************************************/
 
