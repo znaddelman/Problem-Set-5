@@ -22,14 +22,7 @@ public class Deck {
         public void setDeck() { //method sets each combination of faces and suits together for all 52 cards
             for(int i = 0; i < FACES.length; i++) {
                 for (int j = 0; j < SUITS.length; j++) {
-                    deck[SUITS.length * i + j] = FACES[i] + SUITS[j];
-                }
-            }
-        }
-        public void setDeckNoAces() { //same as set deck but does not include aces (created specifically for horse racing
-            for(int i = 0; i < FACES.length-1; i++) {
-                for (int j = 0; j < SUITS.length; j++) {
-                    deck[SUITS.length * i + j] = FACES[i] + SUITS[j];
+                    deck[SUITS.length * i + j] = FACES[i] + " of " + SUITS[j];
                 }
             }
         }
@@ -47,34 +40,38 @@ public class Deck {
     }
 
     public void getSpot(int i) { //gets a single card from the deck
-            //getSpot is useful for for loops where it can pull cards from the top of a pile
+            //getSpot is useful for loops where it can pull cards from the top of a pile
         System.out.println(deck[i]);
     }
 
-    public boolean isHeart(int i) { //boolean for if a card is a heart
+    public boolean isHeart(int i) {
             if(deck[i].contains("Hearts")) {
                 return true;
             }
             return false;
     }
-    public boolean isSpade(int i) {//same as above but spades
+    public boolean isSpade(int i) {
         if(deck[i].contains("Spades")) {
             return true;
         }
         return false;
     }
-    public boolean isClub(int i) {//same as above but clubs
+    public boolean isClub(int i) {
         if(deck[i].contains("Clubs")) {
             return true;
         }
         return false;
     }
-    public boolean isDiamond(int i) { //same as above but diamond
+    public boolean isDiamond(int i) {
         if(deck[i].contains("Diamonds")) {
             return true;
         }
         return false;
     }
+
+
+
+
 
 
 }

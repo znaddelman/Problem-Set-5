@@ -18,26 +18,27 @@ public class HorseRacing extends Deck { //horse racing extends deck of cards
         Scanner scnr = new Scanner(System.in);
         int heartMult, diamondMult, spadeMult, clubMult;
         String input;
-        boolean validWager, userPlay = true;
+        boolean validWager, validInput, userPlay = true;
 
         //create new deck
         Deck deck = new Deck();
-        deck.setDeckNoAces(); //sets deck without aces (aces are what are being moved along)
-        deck.shuffle();
+        deck.setDeck();
+
 
         System.out.println("You have $" + playerMoney + " left.");
         System.out.println(" ");
 
-        System.out.println("Enter 'I' to read instructions, or enter anything else to ignore them");
+        System.out.println("Press I to read instructions / Enter anything else to ignore");
         input = scnr.next();
 
         if(input.equals("I")||input.equals("i")) {
             instructions();
         }
         while(userPlay) {
-
+            deck.shuffle();
             boolean playAnswer = true;
             validWager = true;
+            validInput = true;
             int heartLength = 0, diamondLength = 0, spadeLength = 0, clubLength = 0;
             int heartOdds = 0, diamondOdds = 0, spadeOdds = 0, clubOdds = 0;
             int wager = 0;
@@ -56,7 +57,7 @@ public class HorseRacing extends Deck { //horse racing extends deck of cards
                     System.out.println("Insufficient funds.");
                 }
             }
-            System.out.println();
+            System.out.println("\nThe initial 7 cards the dealer drew are...");
             for (int i = 0; i < 7; i++) {
                 deck.getSpot(i);
                 if(deck.isHeart(i)) {
@@ -96,12 +97,28 @@ public class HorseRacing extends Deck { //horse racing extends deck of cards
             diamondMult = getMultiplier(diamondOdds);
             spadeMult = getMultiplier(spadeOdds);
             clubMult = getMultiplier(clubOdds);
+
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
             printMultipliers(heartMult, diamondMult, spadeMult, clubMult);
 
-            System.out.println("Which suit would you like to bet on?");
-            System.out.println("(H for heart, C for club, D for diamonds, S for spades)");
+            while(validInput) {
+                System.out.println("Which suit would you like to bet on?");
+                System.out.println("(H for heart, C for club, D for diamonds, S for spades)");
+                input = scnr.next();
 
-            input = scnr.next();
+                if(input.equals("C")||input.equals("c")||input.equals("D")||input.equals("d")||input.equals("H")||input.equals("h")||input.equals("S")||input.equals("s")) {
+                    validInput = false;
+                } else {
+                    System.out.println("Invalid input. Please try again...");
+                }
+            }
+
+
+
 
             System.out.print("DIAMOND: ");
             howFar(diamondLength);
@@ -111,10 +128,8 @@ public class HorseRacing extends Deck { //horse racing extends deck of cards
             howFar(spadeLength);
             System.out.print("HEART:   ");
             howFar(heartLength);
-            System.out.println(playerMoney + "!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+
             if(race(deck, clubLength, diamondLength, heartLength, spadeLength).equals(userWins(input))) {
-                System.out.println(userWins(input) + " !!!!!!!!!!!EIJFDSLJFLSKDFJM");
-                System.out.println("Wager: " + wager);
                 if(userWins(input).equals("Diamonds")) {
                     playerMoney += wager * diamondMult;
                     System.out.println("Diamonds win!");
@@ -135,10 +150,10 @@ public class HorseRacing extends Deck { //horse racing extends deck of cards
                     System.out.println("Did not work!");
                 }
 
+
                 System.out.println("You win!");
                 System.out.println("Your remaining balance is " + playerMoney);
             } else {
-                System.out.println(userWins(input) + " !!!!!!!!!!!EIJFDSLJFLSKDFJM");
                 playerMoney -= wager;
                 System.out.println("You lose!");
                 System.out.println("Your remaining balance is " + playerMoney);
@@ -184,14 +199,19 @@ public class HorseRacing extends Deck { //horse racing extends deck of cards
     }
 
     public static void printMultipliers(int h, int d, int s, int c) {
-        System.out.println("The dealer has determined the odds...");
+        System.out.println("\nThe dealer has determined the odds...");
         System.out.println("Hearts: " + h + "-in-1" + "\nDiamonds: " + d + "-in-1" + "\nSpades: " + s + "-in-1" + "\nClubs: " + c + "-in-1");
     }
 
     public static String race(Deck deck, int c, int d, int h, int s ) {
 
         for (int i = 8; i < 48; i++) {
-            System.out.println();
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+            System.out.println("\nThe dealer has drawn a...");
             deck.getSpot(i);
             if(deck.isHeart(i)) {
                 h++;
@@ -203,6 +223,11 @@ public class HorseRacing extends Deck { //horse racing extends deck of cards
                 s++;
             }
 
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
             System.out.print("DIAMOND: ");
             howFar(d);
             System.out.print("CLUB:    ");
@@ -240,10 +265,10 @@ public class HorseRacing extends Deck { //horse racing extends deck of cards
     }
 
     public static String userWins (String input) {
-             if(input.equals("D")) { return "Diamonds";}
-        else if(input.equals("S")) {return "Spades";}
-        else if(input.equals("C")) {return "Clubs";}
-        else if(input.equals("H")) {return "Hearts"; }
+             if(input.equals("D")||input.equals("d")) { return "Diamonds";}
+        else if(input.equals("S") ||input.equals("s")) {return "Spades";}
+        else if(input.equals("C")||input.equals("c")) {return "Clubs";}
+        else if(input.equals("H")||input.equals("h")) {return "Hearts"; }
         return "";
     }
 
@@ -260,12 +285,13 @@ public class HorseRacing extends Deck { //horse racing extends deck of cards
         System.out.println("2 cards: 3-in-1");
         System.out.println("3 cards: 5-in-1");
         System.out.println("4 cards: 10-in-1");
-        System.out.println("(5 or more cards is rare, but resets the deck because it would be impossible for that suit to win)");
-        System.out.println("The dealer deals cards from the remainder of the deck one at a time face up onto a pile. Each time a " +
-                "\ncard is dealt, the horse of that suit moves one space to the right along the course. The first horse " +
-                "\nto cross the finish line (which will happen when eight cards of that suit have been dealt) wins the race. The " +
-                "\ndealer pays out the bets on the winning horse and collects the bets on the others. It is then the next player's " +
-                "\nturn to deal.");
+        System.out.println("(5 or more cards is rare, but resets the deck because it's impossible for that suit to win)");
+        System.out.println("The dealer deals cards from the remainder of the deck one at a time face up onto a pile. " +
+                "\nEach time a card is dealt, the horse of that suit moves one space to the right along the course. The " +
+                "\nfirst horse to cross the finish line (which will happen when eight cards of that suit have been dealt) wins" +
+                "\n the race. The dealer pays out the bets on the winning horse and collects the bets on the others. It is then " +
+                "\nthe next player's turn to deal.");
+
     }
 
     public static void header() {
