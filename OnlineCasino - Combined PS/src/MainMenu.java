@@ -8,6 +8,8 @@
  * @acknowledgement: N/A
  ***********************************************************************/
 
+import Wordle.PlayGame;
+
 import java.util.Scanner;
 public class MainMenu {
     public static void main(String[] args) {
@@ -21,7 +23,7 @@ public class MainMenu {
             System.out.println("2 - Blackjack");
             System.out.println("3 - Roulette");
             System.out.println("4 - Horse Racing");
-            System.out.println("5 - ");
+            System.out.println("5 - Wordle");
             System.out.println("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
             System.out.println(" ");
             System.out.print("Type a number corresponding to a menu option: ");
@@ -74,6 +76,9 @@ public class MainMenu {
         }
         if(userChoice == 4) {
             playerMoney = HorseRacing.raceHorses(playerMoney);
+        }
+        if (userChoice == 5) {
+            playerMoney = PlayGame.play(playerMoney);
         }
         return playerMoney;
     }
