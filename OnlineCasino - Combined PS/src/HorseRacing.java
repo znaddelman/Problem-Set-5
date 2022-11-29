@@ -1,7 +1,7 @@
 /**********************************************************************
  * @file HorseRacing.java
  * @brief Created a horse racing card game in Java. Inputs user's money
- * and plays until user quits
+ * and plays until user quits.
  * @author Zach Naddelman
  * @date: 11/28/2022
  * @acknowledgement: N/A
@@ -24,24 +24,28 @@ public class HorseRacing extends Deck { //horse racing extends deck of cards
         Deck deck = new Deck();
         deck.setDeck();
 
-
+        //tells user how much money they have left
         System.out.println("You have $" + playerMoney + " left.");
         System.out.println(" ");
 
+        //user can ask for instructions if they've never played before
         System.out.println("Press I to read instructions / Enter anything else to ignore");
         input = scnr.next();
 
+        //if user inputs I, initiate the instructions() function (otherwise just ignore and keep going)
         if(input.equals("I")||input.equals("i")) {
             instructions();
         }
-        while(userPlay) {
-            deck.shuffle();
+
+        while(userPlay) {//while the user is playing (loops until turn is over and user does not want to play anymore)
+            deck.shuffle(); //deck shuffles at beginning of each round
             boolean playAnswer = true;
             validWager = true;
-            validInput = true;
+            validInput = true; //set booleans to true, lengths and odds = 0, wager = 0
             int heartLength = 0, diamondLength = 0, spadeLength = 0, clubLength = 0;
             int heartOdds = 0, diamondOdds = 0, spadeOdds = 0, clubOdds = 0;
             int wager = 0;
+
             while (validWager) { //keeps looping until it gets a valid wager amount or reads that the user is out of money.
                 System.out.println();
                 System.out.print("Enter wager amount: ");
@@ -57,10 +61,12 @@ public class HorseRacing extends Deck { //horse racing extends deck of cards
                     System.out.println("Insufficient funds.");
                 }
             }
+            //game starts!!
+            //dealers first 7 cards are drawn (to determine odds)
             System.out.println("\nThe initial 7 cards the dealer drew are...");
-            for (int i = 0; i < 7; i++) {
-                deck.getSpot(i);
-                if(deck.isHeart(i)) {
+            for (int i = 0; i < 7; i++) { //for loop that uses getSpot() from deck, adds 1 to odd counter depending on what the card is
+                deck.getSpot(i); //gets the card value
+                if(deck.isHeart(i)) { //if card is heart, heart odds increases by 1 (repeats for each suit)
                     heartOdds++;
                 } else if(deck.isClub(i)) {
                     clubOdds++;
@@ -70,7 +76,7 @@ public class HorseRacing extends Deck { //horse racing extends deck of cards
                     spadeOdds++;
                 }
             }
-            //if 5 of a suit is drawn, restart
+            //if 5 of a suit is drawn, restart (extremely rare case but could maybe happen)
             while(heartOdds >= 5 || clubOdds >= 5 || diamondOdds >= 5 || spadeOdds >=5) {
                 deck.shuffle();
                 heartOdds = 0;
@@ -93,23 +99,28 @@ public class HorseRacing extends Deck { //horse racing extends deck of cards
 
             }
 
+            //set multiplier vars equal to odds through getMultiplier() function
             heartMult = getMultiplier(heartOdds);
             diamondMult = getMultiplier(diamondOdds);
             spadeMult = getMultiplier(spadeOdds);
             clubMult = getMultiplier(clubOdds);
 
-            try {
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
-            printMultipliers(heartMult, diamondMult, spadeMult, clubMult);
+            //delay for 2 seconds before printing the odds
+//            try {
+//                Thread.sleep(2000);
+//            } catch (InterruptedException e) {
+//                throw new RuntimeException(e);
+//            }
+            //prints odds
+            printOdds(heartMult, diamondMult, spadeMult, clubMult);
 
-            while(validInput) {
+            while(validInput) { //while loop to ensure that the user has made a valid input
+                //ask user for input
                 System.out.println("Which suit would you like to bet on?");
                 System.out.println("(H for heart, C for club, D for diamonds, S for spades)");
                 input = scnr.next();
 
+                //if input is valid, break, otherwise ask again until the input is valid
                 if(input.equals("C")||input.equals("c")||input.equals("D")||input.equals("d")||input.equals("H")||input.equals("h")||input.equals("S")||input.equals("s")) {
                     validInput = false;
                 } else {
@@ -117,9 +128,7 @@ public class HorseRacing extends Deck { //horse racing extends deck of cards
                 }
             }
 
-
-
-
+            //print the initial board
             System.out.print("DIAMOND: ");
             howFar(diamondLength);
             System.out.print("CLUB:    ");
@@ -129,7 +138,9 @@ public class HorseRacing extends Deck { //horse racing extends deck of cards
             System.out.print("HEART:   ");
             howFar(heartLength);
 
-            if(race(deck, clubLength, diamondLength, heartLength, spadeLength).equals(userWins(input))) {
+            //race() runs the code!!
+            if(race(deck, clubLength, diamondLength, heartLength, spadeLength).equals(userWins(input))) {  //if user's selection matches winner...
+                //if suit wins, pay out the correct amount using multiplier, wager, and playerMoney variables
                 if(userWins(input).equals("Diamonds")) {
                     playerMoney += wager * diamondMult;
                     System.out.println("Diamonds win!");
@@ -146,25 +157,21 @@ public class HorseRacing extends Deck { //horse racing extends deck of cards
                     playerMoney += wager * clubMult;
                     System.out.println("Clubs Win!");
                 }
-                else{
-                    System.out.println("Did not work!");
-                }
-
-
+                //display user wins and remaining balance
                 System.out.println("You win!");
                 System.out.println("Your remaining balance is " + playerMoney);
             } else {
+                //subtract wager, user loses, and remaining balance
                 playerMoney -= wager;
                 System.out.println("You lose!");
                 System.out.println("Your remaining balance is " + playerMoney);
             }
 
-            while (playAnswer) {
+            while (playAnswer) {//while loop to ask if player wants to play again
                 System.out.print("Would you like to play again? [y/n]: "); // asks for input to play again or not
                 String playAgain = scnr.next();
-                if (playAgain.equals("y") || playAgain.equals("Y")) { //keeps the mainloop going by re-establishing that userPlay is true.
+                if (playAgain.equals("y") || playAgain.equals("Y")) { //keeps the main loop going by re-establishing that userPlay is true.
                     userPlay = true;
-                    playAnswer = false;
                     break;
                 } else if (playAgain.equals("N") || playAgain.equals("n")){ //if they don't want to play spit out the game statistics and stop the code.
                     userPlay = false;
@@ -184,12 +191,12 @@ public class HorseRacing extends Deck { //horse racing extends deck of cards
 
 
         }
-        return playerMoney;
+        return playerMoney; //returns player money to main menu to be used for other games
 
     }
 
 
-    public static int getMultiplier(int odds) {
+    public static int getMultiplier(int odds) { //returns odds based how many cards were dealt in the initial 7
         if(odds == 0) {return 1;}
         if(odds == 1) {return 2;}
         if(odds == 2) {return 3;}
@@ -198,21 +205,25 @@ public class HorseRacing extends Deck { //horse racing extends deck of cards
         else {return 0;}
     }
 
-    public static void printMultipliers(int h, int d, int s, int c) {
+    public static void printOdds(int h, int d, int s, int c) { //prints odds (played before user bets and after initial 7 cards are dealt)
         System.out.println("\nThe dealer has determined the odds...");
         System.out.println("Hearts: " + h + "-in-1" + "\nDiamonds: " + d + "-in-1" + "\nSpades: " + s + "-in-1" + "\nClubs: " + c + "-in-1");
     }
 
-    public static String race(Deck deck, int c, int d, int h, int s ) {
+    public static String race(Deck deck, int c, int d, int h, int s ) { //game function, happens after user bets
 
-        for (int i = 8; i < 48; i++) {
-            try {
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
+        for (int i = 8; i < 52; i++) { //start at the 8th card (skip the first 7 since they were already drawn)
+            //delay 2 seconds to give user time to process what's going on
+//            try {
+//                Thread.sleep(2000);
+//            } catch (InterruptedException e) {
+//                throw new RuntimeException(e);
+//            }
+            //print user card
             System.out.println("\nThe dealer has drawn a...");
             deck.getSpot(i);
+
+            //count how much each suit has been drawn (add by 1 when the suit is drawn)
             if(deck.isHeart(i)) {
                 h++;
             } else if(deck.isClub(i)) {
@@ -223,11 +234,13 @@ public class HorseRacing extends Deck { //horse racing extends deck of cards
                 s++;
             }
 
-            try {
-                Thread.sleep(2000);
-            } catch (InterruptedException e) {
-                throw new RuntimeException(e);
-            }
+            //give player 2 seconds to process the board changing
+//            try {
+//                Thread.sleep(2000);
+//            } catch (InterruptedException e) {
+//                throw new RuntimeException(e);
+//            }
+            //display the game board, user can visualize how each suit is doing
             System.out.print("DIAMOND: ");
             howFar(d);
             System.out.print("CLUB:    ");
@@ -236,6 +249,8 @@ public class HorseRacing extends Deck { //horse racing extends deck of cards
             howFar(s);
             System.out.print("HEART:   ");
             howFar(h);
+
+            //when a suit has been drawn 8 times, return the suit
             if(h == 8) {
                 return "Hearts";
             }
@@ -249,10 +264,11 @@ public class HorseRacing extends Deck { //horse racing extends deck of cards
             }
 
         }
-        return "";
+        return ""; //empty string so that the code doesn't yell at me
     }
 
-    public static void howFar(int l) {
+    public static void howFar(int l) { //how far function inputs the number of cards in a suit drawn and prints the appropriate game board for each suit
+        //(used in race())
              if(l==0) {System.out.println("A:::::::#"); }
         else if(l==1) {System.out.println(":A::::::#"); }
         else if(l==2) {System.out.println("::A:::::#"); }
@@ -264,7 +280,7 @@ public class HorseRacing extends Deck { //horse racing extends deck of cards
         else if(l==8) {System.out.println("::::::::A"); }
     }
 
-    public static String userWins (String input) {
+    public static String userWins (String input) { //return user input
              if(input.equals("D")||input.equals("d")) { return "Diamonds";}
         else if(input.equals("S") ||input.equals("s")) {return "Spades";}
         else if(input.equals("C")||input.equals("c")) {return "Clubs";}
@@ -272,7 +288,7 @@ public class HorseRacing extends Deck { //horse racing extends deck of cards
         return "";
     }
 
-    public static void instructions() {
+    public static void instructions() { //instructions method
         System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=");
         System.out.println("    How To Play Horse Racing    ");
         System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=");
@@ -294,9 +310,9 @@ public class HorseRacing extends Deck { //horse racing extends deck of cards
 
     }
 
-    public static void header() {
-        System.out.println("");
-        System.out.println("");
+    public static void header() { //header method
+        System.out.println();
+        System.out.println();
         System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=");
         System.out.println("    Welcome to Horse Racing     ");
         System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=");

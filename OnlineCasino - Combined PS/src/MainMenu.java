@@ -39,7 +39,7 @@ public class MainMenu {
             System.out.println("=-=-=-=-Bank Menu-=-=-=-=");
             System.out.println("1 - Check Balance");
             System.out.println("2 - Make Deposit");
-            System.out.println("3 - Exit");
+            System.out.println("3 - Exit to Main Menu");
             System.out.println("=-=-=-=-=-=-=-=-=-=-=-=-=");
             System.out.print("Pick a number corresponding to a menu option: ");
             int bankMenuSelection = sc.nextInt();

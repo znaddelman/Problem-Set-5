@@ -44,29 +44,17 @@ public class Deck {
         System.out.println(deck[i]);
     }
 
-    public boolean isHeart(int i) {
-            if(deck[i].contains("Hearts")) {
-                return true;
-            }
-            return false;
+    public boolean isHeart(int i) { //boolean to check if a card in the deck is a heart
+        return deck[i].contains("Hearts");
     }
-    public boolean isSpade(int i) {
-        if(deck[i].contains("Spades")) {
-            return true;
-        }
-        return false;
+    public boolean isSpade(int i) { //same as above but spades
+        return deck[i].contains("Spades");
     }
-    public boolean isClub(int i) {
-        if(deck[i].contains("Clubs")) {
-            return true;
-        }
-        return false;
+    public boolean isClub(int i) { //same as above but clubs
+        return deck[i].contains("Clubs");
     }
-    public boolean isDiamond(int i) {
-        if(deck[i].contains("Diamonds")) {
-            return true;
-        }
-        return false;
+    public boolean isDiamond(int i) {//same as above but diamonds
+        return deck[i].contains("Diamonds");
     }
 
 
