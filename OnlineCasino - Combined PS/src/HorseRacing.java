@@ -106,11 +106,11 @@ public class HorseRacing extends Deck { //horse racing extends deck of cards
             clubMult = getMultiplier(clubOdds);
 
             //delay for 2 seconds before printing the odds
-//            try {
-//                Thread.sleep(2000);
-//            } catch (InterruptedException e) {
-//                throw new RuntimeException(e);
-//            }
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
             //prints odds
             printOdds(heartMult, diamondMult, spadeMult, clubMult);
 
@@ -214,11 +214,11 @@ public class HorseRacing extends Deck { //horse racing extends deck of cards
 
         for (int i = 8; i < 52; i++) { //start at the 8th card (skip the first 7 since they were already drawn)
             //delay 2 seconds to give user time to process what's going on
-//            try {
-//                Thread.sleep(2000);
-//            } catch (InterruptedException e) {
-//                throw new RuntimeException(e);
-//            }
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
             //print user card
             System.out.println("\nThe dealer has drawn a...");
             deck.getSpot(i);
@@ -235,11 +235,11 @@ public class HorseRacing extends Deck { //horse racing extends deck of cards
             }
 
             //give player 2 seconds to process the board changing
-//            try {
-//                Thread.sleep(2000);
-//            } catch (InterruptedException e) {
-//                throw new RuntimeException(e);
-//            }
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
             //display the game board, user can visualize how each suit is doing
             System.out.print("DIAMOND: ");
             howFar(d);
@@ -305,8 +305,7 @@ public class HorseRacing extends Deck { //horse racing extends deck of cards
         System.out.println("The dealer deals cards from the remainder of the deck one at a time face up onto a pile. " +
                 "\nEach time a card is dealt, the horse of that suit moves one space to the right along the course. The " +
                 "\nfirst horse to cross the finish line (which will happen when eight cards of that suit have been dealt) wins" +
-                "\n the race. The dealer pays out the bets on the winning horse and collects the bets on the others. It is then " +
-                "\nthe next player's turn to deal.");
+                "\n the race. The dealer pays out the bets on the winning horse and collects the bets on the others.");
 
     }
 
