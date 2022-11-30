@@ -12,8 +12,10 @@ public class PlayGame {
         System.out.println("      WELCOME TO WORDLE");
         System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=");
 
-        Scanner scnr = new Scanner(System.in);
         System.out.println("Enter the wager amount: ");
+        Scanner sc = new Scanner(System.in);
+        int wagerAmount = sc.nextInt();
+
 
 
         String[] words = {"MONEY", "EARTH", "CABLE", "RAISE", "GHOST", "PEACH", "ALONE", "UNITE", "YOUTH", "AWARD"};
@@ -31,6 +33,7 @@ public class PlayGame {
         display.print();
         if (board.didWin()) {
             System.out.println("Congratulations, you guessed correctly");
+            playerMoney = playerMoney - wagerAmount;
         } else {
             System.out.println("Incorrect, The answer was " + board.getWord());
         }

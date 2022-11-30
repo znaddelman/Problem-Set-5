@@ -14,22 +14,17 @@ public class Display {
         this.input = input;
     }
 
-    // Prints out the board
-    // Prints out previous guesses and remaining attempts
     public void print() {
         printGuesses();
         printBlanks();
         clear();
     }
 
-    // Clears the terminal
     public void clear() {
         System.out.print("\033[H\033[2J");
         System.out.flush();
     }
 
-    // Prompts user to type in a guess from the terminal
-    // Will only take in words of an appropriate length
     public String promptGuess() {
         while (true) {
             System.out.print("Enter a word: ");
