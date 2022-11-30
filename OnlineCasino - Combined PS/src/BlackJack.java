@@ -1,3 +1,12 @@
+/**********************************************************************
+ * @file BlackJack.java
+ * @brief: Since we already made a blackjack game, I made a wager component so that it would integrate with the rest of the project.
+ * This did not take very long to do, so I made another game besides this one as well.
+ * @authors Christian Hayden
+ * @date: 11/28/2022
+ * @acknowledgement: N/A
+ ***********************************************************************/
+
 import java.util.Scanner;
 import java.util.Random;
 public class BlackJack {
@@ -25,11 +34,15 @@ public class BlackJack {
             dealerTotal = 0;
             boolean stand = false;
             System.out.println("You have $" + playerMoney + " left.");
+            if (playerMoney <= 0){
+                System.out.println("You're out of money... get out of here!");
+                userPlay = false;
+                break;
+            }
             System.out.println("===Hand #" + handNumber + "===");
-            System.out.println(" ");
             while (validWager) { //keeps looping until it gets a valid wager amount or reads that the user is out of money.
                 System.out.println();
-                System.out.print("Enter wager amount: ");
+                System.out.print("Enter a valid wager amount: ");
                 int wagerAmt = scnr.nextInt(); // asks for wager amount
                 if (wagerAmt <= playerMoney) {
                     potAmt = wagerAmt; //creates a pot
@@ -126,7 +139,7 @@ public class BlackJack {
         }
         return playerMoney;
     }
-    public static int userChoice() {
+    public static int userChoice() { //Asks the user to choose hit or stand
         boolean validAnswer = true;
         Scanner scnrTwo = new Scanner(System.in);
         Random randTwo = new Random();
