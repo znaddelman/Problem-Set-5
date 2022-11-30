@@ -1,5 +1,3 @@
-package Wordle;
-
 import java.util.Scanner;
 
 public class Display {

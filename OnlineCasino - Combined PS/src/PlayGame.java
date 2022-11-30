@@ -1,11 +1,8 @@
-package Wordle;
-
-import java.awt.*;
 import java.util.Random;
 import java.util.Scanner;
 
 public class PlayGame {
-    public static int play (int playerMoney) {
+    public static int play(int playerMoney) {
 
 
         System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=");
