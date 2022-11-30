@@ -305,8 +305,7 @@ public class HorseRacing extends Deck { //horse racing extends deck of cards
         System.out.println("The dealer deals cards from the remainder of the deck one at a time face up onto a pile. " +
                 "\nEach time a card is dealt, the horse of that suit moves one space to the right along the course. The " +
                 "\nfirst horse to cross the finish line (which will happen when eight cards of that suit have been dealt) wins" +
-                "\n the race. The dealer pays out the bets on the winning horse and collects the bets on the others. It is then " +
-                "\nthe next player's turn to deal.");
+                "\n the race. The dealer pays out the bets on the winning horse and collects the bets on the others.");
 
     }
 
