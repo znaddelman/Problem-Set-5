@@ -1,3 +1,12 @@
+/**********************************************************************
+ * @file Board.java
+ * @brief This is the code that display the users input word
+ * @authors Kevin Chuang
+ * @date: 11/27/2022
+ * @acknowledgement: NA
+ ***********************************************************************/
+
+
 package Wordle;
 
 import java.util.Scanner;
