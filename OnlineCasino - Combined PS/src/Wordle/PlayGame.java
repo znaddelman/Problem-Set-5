@@ -1,3 +1,14 @@
+package Wordle;
+
+/**********************************************************************
+ * @file Roulette.java
+ * @brief I made a Wordle game that the user can bet on. Usually a user has 6 chances to
+   guess the word but because we are a casino, I limited it to only 5 chances of guessing.
+ * @authors Kevin Chuang
+ * @date: 11/27/2022
+ * @acknowledgement: TA: Ash Rai
+ ***********************************************************************/
+
 import java.util.Random;
 import java.util.Scanner;
 

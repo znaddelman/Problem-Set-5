@@ -1,11 +1,13 @@
+package Wordle;
+
 import java.util.Scanner;
 
 public class Display {
     Board board;
     Scanner input;
-    public static final String ANSI_RESET = "\u001B[0m";
-    public static final String ANSI_GREEN = "\u001B[32m";
-    public static final String ANSI_YELLOW = "\u001B[33m";
+    public static String ANSI_RESET = "\u001B[0m";
+    public static String ANSI_GREEN = "\u001B[32m";
+    public static String ANSI_YELLOW = "\u001B[33m";
 
     public Display(Board board, Scanner input) {
         this.board = board;
