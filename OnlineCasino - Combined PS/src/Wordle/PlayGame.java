@@ -15,43 +15,53 @@ import java.util.Scanner;
 public class PlayGame {
     public static int play(int playerMoney) {
 
+        boolean playWordle = true;
 
-        System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=");
-        System.out.println("      WELCOME TO WORDLE");
-        System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=");
-        System.out.println("You have $" + playerMoney + " left.");
+        while(playWordle) {
+            System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=");
+            System.out.println("      WELCOME TO WORDLE");
+            System.out.println("+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=+=");
+            System.out.println("You have $" + playerMoney + " left.");
 
-        Scanner sc = new Scanner(System.in);
-        System.out.print("Enter the wager amount: ");
-        int wagerAmount = sc.nextInt();
+            Scanner sc = new Scanner(System.in);
+            System.out.print("Enter the wager amount: ");
+            int wagerAmount = sc.nextInt();
 
 
-        String[] words = {"MONEY", "EARTH", "CABLE", "RAISE", "GHOST", "PEACH", "ALONE", "UNITE", "YOUTH", "AWARD", "WATER", "BLOCK", "ZEBRA"};
-        String answer = words[new Random().nextInt(words.length)].toUpperCase();
+            String[] words = {"MONEY", "EARTH", "CABLE", "RAISE", "GHOST", "PEACH", "ALONE", "UNITE", "YOUTH", "AWARD", "WATER", "BLOCK", "ZEBRA"};
+            String answer = words[new Random().nextInt(words.length)].toUpperCase();
 
-        Board board = new Board(words);
+            Board board = new Board(words);
+            Scanner input = new Scanner(System.in);
 
-        Scanner input = new Scanner(System.in);
-
-        Display display = new Display(board, input);
-        while (!board.isGameOver()) {
-            display.print();
-            display.promptGuess();
-        }
-        display.print();
-        if (board.didWin()) {
-            playerMoney = playerMoney + wagerAmount;
-            System.out.println("You won, you now have $" + playerMoney);
-        } else {
-            playerMoney = playerMoney - wagerAmount;
-            System.out.println("Incorrect, The answer was " + board.getWord());
-            System.out.println("you now have $" + playerMoney);
+            Display display = new Display(board, input);
+            while (!board.isGameOver()) {
+                display.print();
+                display.promptGuess();
             }
-        if (playerMoney<=0){
-            System.out.println("You're broke, GET OUT!");
-        }
+            display.print();
+            if (board.didWin()) {
+                playerMoney = playerMoney + wagerAmount;
+                System.out.println("You won, you now have $" + playerMoney);
+            } else {
+                playerMoney = playerMoney - wagerAmount;
+                System.out.println("Incorrect, The answer was " + board.getWord());
+                System.out.println("you now have $" + playerMoney);
 
-        input.close();
+            }
+            if (playerMoney <= 0) {
+                System.out.println("You're broke, GET OUT!");
+                playWordle = false;
+                break;
+            } else{
+                System.out.print("Play again? [y/n]: ");
+                String playAgain = sc.next();
+                if (playAgain.equals("y") || playAgain.equals("Y")) {
+                    playWordle = true;
+                }
+                else break;
+            }
+        }
         return playerMoney;
     }
 }
