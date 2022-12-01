@@ -107,7 +107,7 @@ public class HorseRacing extends Deck { //horse racing extends deck of cards
 
             //delay for 2 seconds before printing the odds
             try {
-                Thread.sleep(2000);
+                Thread.sleep(1200);
             } catch (InterruptedException e) {
                 throw new RuntimeException(e);
             }

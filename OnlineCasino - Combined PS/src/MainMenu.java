@@ -24,6 +24,8 @@ public class MainMenu {
             System.out.println("3 - Roulette");
             System.out.println("4 - Horse Racing");
             System.out.println("5 - Wordle");
+            System.out.println("6 - Slots");
+            System.out.println("7 - Exit Game");
             System.out.println("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=");
             System.out.println(" ");
             System.out.print("Type a number corresponding to a menu option: ");
@@ -79,6 +81,12 @@ public class MainMenu {
         }
         if (userChoice == 5) {
             playerMoney = PlayGame.play(playerMoney);
+        }
+        if (userChoice == 6){
+            playerMoney = Slots.playSlots(playerMoney);
+        }
+        if (userChoice == 7){
+            System.exit(0);
         }
         return playerMoney;
     }
